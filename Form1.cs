@@ -16,7 +16,7 @@ namespace Projet03
         public static string Nom_bonbonChoisi;
         public static decimal Prix_bonbonChoisi;
         public static int Stock_bonbonChoisi;
-        public static decimal totalMonnaie = 0;
+        public static decimal MonnaieRemise, totalMonnaie = 0;
         public List<decimal> monnaiesPossible = new List<decimal> { 0.05m, 0.1m, 0.25m, 1, 2 };
 
         public FrmPrincipale()
@@ -66,7 +66,7 @@ namespace Projet03
             
             if (totalMonnaie >= Prix_bonbonChoisi)
             {
-                decimal MonnaieRemise = calculRemis(totalMonnaie, Prix_bonbonChoisi);
+                MonnaieRemise = calculRemis(totalMonnaie, Prix_bonbonChoisi);
                 totalMonnaie = 0;
                 lblRemis.Text = Convert.ToString(MonnaieRemise);
                 lblMessage.Visible = true;
@@ -129,6 +129,11 @@ namespace Projet03
             {
                 MessageBox.Show($"Monnaie rendue : {totalMonnaie:C}", "Remboursement", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+            if (MonnaieRemise > 0)
+            {
+                MessageBox.Show($"Monnaie remise : {MonnaieRemise:C}", "Remise apres achat", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
             totalMonnaie = 0;
             TxtChoix.Text = "0";
             TxtMonnaie.Text = "0";
